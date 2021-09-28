@@ -39,3 +39,24 @@ export default function App() {
       setIngredientsText("");
       loadAll();
     }
+  }
+
+  async function addToPlan(recipeId) {
+    const res = await fetch(`${API}/meal-plans`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ day: selectedDay, recipeId }),
+    });
+    if (res.ok) loadAll();
+  }
+
+  return (
+    <div style={{ maxWidth: 820, margin: "28px auto", fontFamily: "Arial, sans-serif", padding: "0 16px" }}>
+      <h1>Recipe &amp; Meal Planner</h1>
+
+      <form onSubmit={addRecipe} style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
+        <input placeholder="Recipe name" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        <select value={newCat} onChange={(e) => setNewCat(e.target.value)}>
+          <option value="breakfast">breakfast</option>
+          <option value="lunch">lunch</option>
+          <option value="dinner">dinner</option>

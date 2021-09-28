@@ -26,3 +26,17 @@ app.get("/api/recipes", async (req, res, next) => {
     const recipes = await Recipe.find(query).sort({ createdAt: -1 });
     res.json(recipes);
   } catch (err) {
+    next(err);
+  }
+});
+
+app.post("/api/recipes", async (req, res, next) => {
+  try {
+    const recipe = await Recipe.create(req.body);
+    res.status(201).json(recipe);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.get("/api/meal-plans", async (req, res, next) => {

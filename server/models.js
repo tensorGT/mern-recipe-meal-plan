@@ -7,3 +7,8 @@ const recipeSchema = new mongoose.Schema(
     ingredients: [{ type: String, required: true }],
     instructions: { type: String, default: "" },
   },
+  { timestamps: true }
+);
+
+const mealPlanSchema = new mongoose.Schema(
+  {
