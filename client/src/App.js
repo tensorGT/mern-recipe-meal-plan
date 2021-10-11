@@ -60,3 +60,24 @@ export default function App() {
           <option value="breakfast">breakfast</option>
           <option value="lunch">lunch</option>
           <option value="dinner">dinner</option>
+        </select>
+        <input
+          placeholder="Ingredients (comma separated)"
+          value={ingredientsText}
+          onChange={(e) => setIngredientsText(e.target.value)}
+          required
+        />
+        <button type="submit">Add Recipe</button>
+      </form>
+
+      <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+        <input placeholder="Search recipes..." value={search} onChange={(e) => setSearch(e.target.value)} />
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="all">all</option>
+          <option value="breakfast">breakfast</option>
+          <option value="lunch">lunch</option>
+          <option value="dinner">dinner</option>
+        </select>
+        <select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)}>
+          {DAYS.map((d) => <option key={d} value={d}>{d}</option>)}
+        </select>

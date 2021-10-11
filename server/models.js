@@ -12,3 +12,8 @@ const recipeSchema = new mongoose.Schema(
 
 const mealPlanSchema = new mongoose.Schema(
   {
+    day: { type: String, required: true },
+    recipe: { type: mongoose.Schema.Types.ObjectId, ref: "Recipe", required: true },
+  },
+  { timestamps: true }
+);

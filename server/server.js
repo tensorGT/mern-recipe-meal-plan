@@ -40,3 +40,17 @@ app.post("/api/recipes", async (req, res, next) => {
 });
 
 app.get("/api/meal-plans", async (req, res, next) => {
+  try {
+    const plans = await MealPlan.find().populate("recipe");
+    res.json(plans);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.post("/api/meal-plans", async (req, res, next) => {
+  try {
+    const plan = await MealPlan.create({ day: req.body.day, recipe: req.body.recipeId });
+    const populated = await plan.populate("recipe").execPopulate();
+    res.status(201).json(populated);
+  } catch (err) {
