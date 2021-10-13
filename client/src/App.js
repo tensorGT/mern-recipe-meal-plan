@@ -81,3 +81,24 @@ export default function App() {
         <select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)}>
           {DAYS.map((d) => <option key={d} value={d}>{d}</option>)}
         </select>
+      </div>
+
+      <h2>Recipes</h2>
+      <ul>
+        {recipes.map((r) => (
+          <li key={r._id} style={{ marginBottom: 8 }}>
+            <strong>{r.title}</strong> ({r.category}) — {r.ingredients.join(", ")}{" "}
+            <button type="button" onClick={() => addToPlan(r._id)}>+ Add to {selectedDay}</button>
+          </li>
+        ))}
+      </ul>
+
+      <h2>Saved Meal Plan</h2>
+      <ul>
+        {plans.map((p) => (
+          <li key={p._id}>{p.day}: {p.recipe ? p.recipe.title : "Deleted recipe"}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}

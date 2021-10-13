@@ -54,3 +54,18 @@ app.post("/api/meal-plans", async (req, res, next) => {
     const populated = await plan.populate("recipe").execPopulate();
     res.status(201).json(populated);
   } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.delete("/api/meal-plans/:id", async (req, res, next) => {
+  try {
+    await MealPlan.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (err) {
+    next(err);
+  }
+});
+
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => console.log("recipe server on " + PORT));
